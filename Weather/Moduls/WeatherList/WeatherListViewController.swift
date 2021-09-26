@@ -9,6 +9,7 @@ import UIKit
 
 final class WeatherListViewController: UIViewController {
     
+    @IBOutlet weak var tableView: UITableView!
     weak var coordinator: WeatherListCoordinatorProtocol?
     
     // MARK:- Private properties
@@ -23,7 +24,7 @@ final class WeatherListViewController: UIViewController {
     }
     
     deinit {
-        presenter.deinitView()
+        coordinator?.deinitView()
     }
 }
 
@@ -41,4 +42,25 @@ extension WeatherListViewController: WeatherListViewProtocol {
     }
     
 }
+
+extension WeatherListViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherTableViewCell",
+                                                       for:indexPath) as? WeatherTableViewCell else {
+            return UITableViewCell()
+        }
+        
+
+        cell.dateLabel.text = "Sept 19"
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
