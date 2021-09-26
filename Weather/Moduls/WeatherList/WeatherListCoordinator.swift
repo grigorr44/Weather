@@ -28,6 +28,7 @@ final class WeatherListCoordinator: Coordinator {
     func start() {
         let viewController: WeatherListViewController = Storyboard.defaultStoryboard.instantiateViewController()
         viewController.coordinator = self
+        viewController.presenter = WeatherListPresenter()
         navController.pushViewController(viewController, animated: true)
     }
 }

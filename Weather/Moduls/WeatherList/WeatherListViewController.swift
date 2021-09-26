@@ -13,7 +13,7 @@ final class WeatherListViewController: UIViewController {
     weak var coordinator: WeatherListCoordinatorProtocol?
     
     // MARK:- Private properties
-    private var presenter: WeatherListPresenter?
+    var presenter: WeatherListPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
