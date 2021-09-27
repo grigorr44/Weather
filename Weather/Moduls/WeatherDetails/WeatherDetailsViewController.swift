@@ -15,7 +15,8 @@ final class WeatherDetailsViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nightTemp: UILabel!
     @IBOutlet weak var dayTemp: UILabel!
-    @IBOutlet weak var statusDescription: UILabel!
+    @IBOutlet weak var nightStatus: UILabel!
+    @IBOutlet weak var dayStatus: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var windArrowImageView: UIImageView!
     @IBOutlet weak var pressureLabel: UILabel!
@@ -85,8 +86,12 @@ extension WeatherDetailsViewController: WeatherDetailsViewProtocol {
         dayTemp.text = temp
     }
     
-    func setStatusDescription(_ text: String) {
-        statusDescription.text = text
+    func setNightStatus(_ text: String) {
+        nightStatus.text = text
+    }
+    
+    func setDayStatus(_ text: String) {
+        dayStatus.text = text
     }
     
     func rotateWindArrow(_ radians: Float) {

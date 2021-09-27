@@ -42,7 +42,8 @@ final class WeatherDetailsPresenter {
         view?.setSunsetDate(dateHourMinFormater(date: weather.sunsetDate))
         view?.setSunriseDate(dateHourMinFormater(date: weather.sunriseDate))
         view?.rotateWindArrow(degreeToRadian(weather.windDegree ?? 0))
-        view?.setStatusDescription(weather.statusDescription ?? "")
+        view?.setDayStatus(getTempratureStatus(weather.dayTemp))
+        view?.setNightStatus(getTempratureStatus(weather.nightTemp))
     }
     
     private func degreeToRadian(_ degrees: Float) -> Float {
@@ -61,5 +62,17 @@ final class WeatherDetailsPresenter {
         dateFormatter.dateFormat = "MMMM dd"
         let dateString = dateFormatter.string(from: date)
         return dateString
+    }
+    
+    private func getTempratureStatus(_ temp: Int) -> String {
+        if temp > 25 {
+            return "Hot"
+        }
+        
+        if temp < 10 {
+            return "Cold"
+        }
+        
+        return ""
     }
 }

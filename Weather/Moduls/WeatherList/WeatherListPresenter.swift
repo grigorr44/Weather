@@ -31,8 +31,10 @@ final class WeatherListPresenter {
     }
     
     func load() {
+        view?.showLoading()
         weatherNetworkingService.getWeatherList(country: "Paris", count: 16) { [weak self] weatherList, error in
             guard let self = self else { return }
+            self.view?.hideLoading()
             if let weatherList = weatherList {
                 self.weatherList = weatherList
                 self.view?.reloadView()
