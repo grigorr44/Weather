@@ -8,10 +8,17 @@
 import Foundation
 
 struct Weather {
-    let id: String
+    let id: Int?
     let date: Date
-    let dayTemp: Float
-    let nightTemp: Float
+    let dayTemp: Int
+    let nightTemp: Int
     let status: String?
+    let statusDescription: String?
     let statusIcon: String?
+    let pressure: Float?
+    let humidity: Float?
+    let speed: Float?
+    let windDegree: Float?
+    let sunriseDate: Date
+    let sunsetDate: Date
 }

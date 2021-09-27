@@ -15,25 +15,41 @@ final class WeatherTableViewCell: UITableViewCell {
     @IBOutlet weak var nightTmprLabel: UILabel!
     @IBOutlet weak var statusIcon: UIImageView!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    // MARK:- Public properties
+    
+    weak var coordinator: WeatherListCoordinatorProtocol?
     
     // MARK:- Private properties
     
     private var presenter: WeatherTableViewCellPresenter?
-        
+    
+    // MARK:- Initialiser
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-//        presenter?.prepareForReuse()
+        presenter?.prepareForReuse()
     }
     
     // MARK:- Public methods
     
     func load() {
-//        presenter?.load()
+        presenter?.load()
+    }
+    
+    func configureView(weather: Weather) {
+        let assetsDownloadingService = AssetsDownloadingService()
+        
+        presenter = WeatherTableViewCellPresenter(view: self,
+                                                  assetsDownloadingService: assetsDownloadingService,
+                                                  weather: weather)
     }
 }
 
 extension WeatherTableViewCell: WeatherTableViewCellProtocol {
-    func setDateText(_ text: String) {
+    
+    func setDate(_ text: String) {
         dateLabel.text = text
     }
     

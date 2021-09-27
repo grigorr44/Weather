@@ -10,9 +10,4 @@ import Foundation
 struct TemperatureDTO: Codable {
     let day: Float
     let night: Float
-    
-//    private enum CodingKeys: String, CodingKey {
-//        case weatherInfolist = "list",
-//             city
-//    }
 }

@@ -11,10 +11,22 @@ struct WeatherInfoDTO: Codable {
     let weather: [WeatherDTO]
     let temperature: TemperatureDTO
     let date: Double
+    let pressure: Float?
+    let humidity: Float?
+    let speed: Float?
+    let windDegree: Float?
+    let sunriseDate: Double
+    let sunsetDate: Double
     
     private enum CodingKeys: String, CodingKey {
         case weather = "weather",
              temperature = "temp",
-             date = "dt"
+             date = "dt",
+             windDegree = "deg",
+             sunriseDate = "sunrise",
+             sunsetDate = "sunset",
+             pressure,
+             humidity,
+             speed
     }
 }

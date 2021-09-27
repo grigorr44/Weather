@@ -8,11 +8,15 @@
 import Foundation
 
 struct WeatherDTO: Codable {
-    let id: String
-    let description: String
+    let id: Int
+    let status: String
+    let statusDescription: String?
     let icon: String
     
-//    private enum CodingKeys: String, CodingKey {
-//        case description
-//    }
+    private enum CodingKeys: String, CodingKey {
+        case status = "main",
+             statusDescription = "description",
+             icon,
+             id
+    }
 }

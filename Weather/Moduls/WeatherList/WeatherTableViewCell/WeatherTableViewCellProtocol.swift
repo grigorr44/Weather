@@ -8,7 +8,7 @@
 import Foundation
 
 protocol WeatherTableViewCellProtocol: AnyObject {
-    func setDateText(_ text: String)
+    func setDate(_ text: String)
     func setDayTmpr(_ tmp: String)
     func setNightTmpr(_ tmp: String)
     func setStatusIcon(_ iconData: Data)

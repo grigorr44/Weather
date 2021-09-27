@@ -9,15 +9,20 @@ import UIKit
 
 protocol WeatherListCoordinatorProtocol: AnyObject {
     func deinitView()
-    func navigateToDetails()
+    func navigateToDetails(_ weather: Weather)
 }
 
 final class WeatherListCoordinator: Coordinator {
+    // MARK:- Public properties
     
     weak var parent: Coordinator?
     var childCoordinators: [Coordinator] = []
     
+    // MARK:- Private properties
+    
     private unowned var navController: UINavigationController
+    
+    // MARK:- Initialiser
     
     init(navController: UINavigationController,
          parent: Coordinator? = nil) {
@@ -25,10 +30,17 @@ final class WeatherListCoordinator: Coordinator {
         self.parent = parent
     }
     
+    // MARK:- Public methods
+    
     func start() {
         let viewController: WeatherListViewController = Storyboard.defaultStoryboard.instantiateViewController()
         viewController.coordinator = self
-        viewController.presenter = WeatherListPresenter()
+        
+        let networkingService = NetworkingService()
+        let weatherNetworkingService = WeatherNetworkingService(networkingService)
+        viewController.presenter = WeatherListPresenter(view: viewController,
+                                                        weatherNetworkingService: weatherNetworkingService)
+        
         navController.pushViewController(viewController, animated: true)
     }
 }
@@ -38,8 +50,8 @@ extension WeatherListCoordinator: WeatherListCoordinatorProtocol {
         parent?.childDidFinish(self)
     }
     
-    func navigateToDetails() {
-        let detailsCoordinator = WeatherDetailsCoordinator(navController: navController, parent: self)
+    func navigateToDetails(_ weather: Weather) {
+        let detailsCoordinator = WeatherDetailsCoordinator(navController: navController, parent: self, weather: weather)
         childCoordinators.append(detailsCoordinator)
         detailsCoordinator.start()
     }

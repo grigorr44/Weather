@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WeatherListViewProtocol {
+protocol WeatherListViewProtocol: AnyObject {
     func reloadView()
     func showLoading()
     func hideLoading()
